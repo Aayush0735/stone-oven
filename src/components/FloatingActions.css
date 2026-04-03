@@ -1,0 +1,102 @@
+/* Radial Floating Actions */
+.fab-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  width: 65px;
+  height: 65px;
+}
+
+.fab-main {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  color: white;
+  border: none;
+  box-shadow: 0 5px 25px rgba(245, 130, 32, 0.4);
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fab-main:hover {
+  transform: scale(1.1);
+}
+
+.fab-main.active {
+  background-color: var(--color-primary);
+  box-shadow: 0 5px 25px rgba(17, 17, 17, 0.4);
+  transform: rotate(90deg); /* Nice spin effect */
+}
+
+/* Hidden items */
+.fab-item {
+  position: absolute;
+  bottom: 5px; /* Center inside main btn roughly */
+  right: 5px;  
+  width: 55px; 
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  z-index: 5;
+  cursor: pointer;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.5); /* Starts shrunk */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+}
+
+.fab-item:hover {
+  filter: brightness(1.1);
+}
+
+/* Open states */
+.fab-item.open-1 {
+  opacity: 1; visibility: visible;
+  transform: translateY(-85px) scale(1); /* Top */
+}
+
+.fab-item.open-2 {
+  opacity: 1; visibility: visible;
+  transform: translate(-65px, -65px) scale(1); /* Top-Left Diagonal */
+}
+
+.fab-item.open-3 {
+  opacity: 1; visibility: visible;
+  transform: translateX(-85px) scale(1); /* Left */
+}
+
+/* Colors */
+.wa-btn {
+  background-color: #25D366;
+}
+
+.ig-btn {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.chat-btn {
+  background-color: #007bff; /* Bright blue for chatbot */
+}
+
+@media (max-width: 768px) {
+  .fab-wrapper {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}

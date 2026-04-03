@@ -1,0 +1,125 @@
+/* Navbar Base */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.8rem 0;
+  z-index: 1000;
+  transition: all var(--transition-normal);
+  background-color: rgba(253, 251, 247, 0.95); /* Always Light/Frosted */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.navbar.scrolled {
+  padding: 0.6rem 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Enhance shadow on scroll */
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo handling */
+.logo span {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-primary); /* Dark text */
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: color var(--transition-normal);
+}
+
+.navbar.scrolled .logo span {
+  color: var(--color-primary); 
+}
+
+.logo span.highlight {
+  color: var(--color-secondary) !important; 
+}
+
+/* Nav links handling */
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--color-primary); /* Dark by default on light hero */
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
+  letter-spacing: 1px;
+  transition: color var(--transition-normal);
+}
+
+.navbar.scrolled .nav-links a {
+  color: var(--color-primary);
+}
+
+.navbar.scrolled .nav-links a.btn {
+  color: var(--color-white); /* Don't change button text */
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-secondary);
+  transition: width var(--transition-fast);
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-links a.btn::after {
+  display: none;
+}
+
+.mobile-toggle {
+  display: none;
+  cursor: pointer;
+  color: var(--color-primary); /* Dark by default */
+}
+
+.navbar.scrolled .mobile-toggle {
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(253, 251, 247, 0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 2rem 0;
+    gap: 1.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.4s ease;
+  }
+  
+  .nav-links a {
+    color: var(--color-primary) !important;
+  }
+  
+  .nav-links.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  
+  .mobile-toggle { display: block; }
+}

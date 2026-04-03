@@ -1,0 +1,35 @@
+.story-text {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
+.cuisine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.cuisine-card {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform var(--transition-fast);
+}
+
+.cuisine-card:hover { 
+  transform: translateY(-5px); 
+}
+
+.cuisine-icon {
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+
+.cuisine-card p {
+  margin-top: 1rem;
+  color: #666;
+}
