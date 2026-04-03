@@ -72,6 +72,10 @@ const Contact = () => {
                     <input type="text" name="name" id="name" className="form-control" required placeholder="John Doe" />
                   </div>
                   <div className="form-group">
+                    <label htmlFor="email">Email Address</label>
+                    <input type="email" name="email" id="email" className="form-control" required placeholder="john@example.com" />
+                  </div>
+                  <div className="form-group">
                     <label htmlFor="phone">Phone Number</label>
                     <input type="tel" name="phone" id="phone" className="form-control" required placeholder="+91 " />
                   </div>
