@@ -79,12 +79,23 @@ const Chatbot = () => {
             setMessages(prev => [...prev, { id: Date.now() + 1, text: botReplies['menu'], isBot: true, action: 'menu' }]);
             return;
         } else {
-            // Fuzzy search our knowledge base
-            const matches = fullMenu.filter(item => 
-                item.name.toLowerCase().includes(lowerQ) || 
-                item.category.toLowerCase().includes(lowerQ) ||
-                (item.desc && item.desc.toLowerCase().includes(lowerQ))
-            );
+            // Tokenize query to search by meaningful keywords
+            const stopWords = ['what', 'whats', 'is', 'in', 'the', 'of', 'for', 'are', 'do', 'you', 'have', 'any', 'good', 'some', 'can', 'i', 'get', 'a'];
+            const tokens = lowerQ.split(/[\s?.,!'"]+/).filter(w => w.length > 2 && !stopWords.includes(w));
+
+            if (tokens.length === 0) {
+                setMessages(prev => [...prev, { id: Date.now() + 1, text: "I'm not exactly sure what you're asking, but " + botReplies['menu'], isBot: true, action: 'menu' }]);
+                return;
+            }
+
+            // Fuzzy search our knowledge base using the extracted tokens
+            const matches = fullMenu.filter(item => {
+                const searchableText = `${item.name.toLowerCase()} ${item.category.toLowerCase()} ${item.desc ? item.desc.toLowerCase() : ''}`;
+                return tokens.some(token => {
+                    const singular = token.endsWith('s') ? token.slice(0, -1) : token;
+                    return searchableText.includes(token) || searchableText.includes(singular);
+                });
+            });
 
             if (matches.length > 0) {
                 const topMatches = matches.slice(0, 3);
